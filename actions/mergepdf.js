@@ -16,7 +16,7 @@ async function work(...arg) {
     doc.addPage(page);
   }
   }
-  fs.writeFileSync('./result.pdf', await doc.save());
+  fs.writeFileSync('./result/result.pdf', await doc.save());
 }
 
 module.exports = {merge};
