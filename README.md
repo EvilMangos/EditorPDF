@@ -1,2 +1,2 @@
-# MergePDF
-Merge PDF files
+# EditorPDF
+Edit PDF files
