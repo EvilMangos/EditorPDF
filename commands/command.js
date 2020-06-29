@@ -1,19 +1,42 @@
-const execa = require('execa');
-const Listr = require('listr');
+// const {merge} = require('../actions/mergepdf');
+// const {split} = require('../actions/split');
+// const yargs = require('yargs');
 
-new Listr([
-  {
-    title: 'Removing package-lock',
-    task: () => execa('rm', ['package-lock.json'])
-  },
-  {
-    title: 'Running npm install',
-    task: () => execa('npm', ['install'])
-  },
-  {
-    title: 'Adding package-lock to git',
-    task: (ctx, task) =>
-        execa('git', ['add', 'package-lock.json'])
-        .catch(() => task.skip())
-  }
-]).run();
+// require('yargs')
+//   .scriptName("merge")
+//   .usage('$0 <cmd> [args]')
+//   .command('Merge some pdf files', (yargs) => {
+//     yargs.positional('file', {
+//       type: 'string',
+//       default: null,
+//       describe: 'PDF file'
+//     })
+//   }, function(argv) {
+//     merge(...(argv.file.split(',')));
+//   } 
+//   )
+//   .help()
+//   .argv
+
+//   require('yargs')
+//   .scriptName("split")
+//   .usage('$0 <cmd> [args]')
+//   .command('Split a pdf file', (yargs) => {
+//     yargs.positional('file', {
+//       type: 'string',
+//       default: null,
+//       describe: 'PDF file'
+//     }, 'number', {
+//       type: 'number',
+//       default: 2,
+//       describe: 'Count of parts'
+//     })
+//   },  split( argv.file, argv.number)
+//   )
+//   .help()
+//   .argv
+
+//split('5.pdf', 3);
+
+  
+ 
