@@ -1,0 +1,22 @@
+{
+  "name": "mergepdf",
+  "version": "1.0.0",
+  "description": "Merge PDF files",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EvilMangos/MergePDF.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EvilMangos/MergePDF/issues"
+  },
+  "homepage": "https://github.com/EvilMangos/MergePDF#readme",
+  "dependencies": {
+    "pdf-lib": "^1.9.0"
+  }
+}
