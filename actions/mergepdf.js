@@ -6,7 +6,7 @@ let merge = (...arg) => work(...arg).catch(err =>{
 } );
 
 async function work(...arg) {
-  // Load cover and content pdfs
+  
   const doc = await PDFDocument.create();
 
   for(let path of arg) {
