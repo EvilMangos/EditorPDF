@@ -1,5 +1,5 @@
-// const { PDFDocument } = require('pdf-lib');
-// const fs = require('fs');
+const { PDFDocument } = require('pdf-lib');
+const fs = require('fs');
 const {merge} = require('./actions/mergepdf');
 const {split} = require('./actions/split');
 const yargs = require('yargs') 
@@ -15,7 +15,7 @@ yargs.command({
       }
     },
     handler: (argv) => merge(...argv.file.split(','))
-  })
+  });
 
     yargs.command({
     command: 'split',
@@ -33,6 +33,12 @@ yargs.command({
       }
     },
     handler: (argv) => split(argv.file, argv.number)
-  })
-
-  yargs.parse()
+  });
+  var foo = yargs.showHelp;
+  yargs.command({
+    command: '?',
+    describe: 'Show help',
+    handler: () => foo()
+  });
+  
+  yargs.parse();
