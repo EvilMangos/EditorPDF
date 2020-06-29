@@ -1,5 +1,6 @@
 const { PDFDocument } = require('pdf-lib');
 const fs = require('fs');
 const {merge} = require('./actions/mergepdf');
+const {split} = require('./actions/split');
 
-merge("1.pdf", "2.pdf", "5.pdf", "3.pdf");
+//split("5.pdf", 4);
