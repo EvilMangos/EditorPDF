@@ -1,12 +1,13 @@
 const { PDFDocument } = require('pdf-lib');
 const fs = require('fs');
 
-let merge = func(...arguments).catch(err => console.log(err)); 
+//merge().catch(err => console.log(err));
 
-async function run(path1, path2) {
+async function merge(path1, path2) {
   // Load cover and content pdfs
-  const cover = await PDFDocument.load(fs.readFileSync(`./${path1}`));
-  const content = await PDFDocument.load(fs.readFileSync(`./${path2}`));
+
+  const cover = await PDFDocument.load(fs.readFileSync(`./pdf/${path1}`));
+  const content = await PDFDocument.load(fs.readFileSync(`./pdf/${path2}`));
 
   // Create a new document
   const doc = await PDFDocument.create();
@@ -25,4 +26,4 @@ async function run(path1, path2) {
   fs.writeFileSync('./result.pdf', await doc.save());
 }
 
-export {merge};
+module.exports = {merge};
