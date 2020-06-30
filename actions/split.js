@@ -12,7 +12,7 @@ try {
 
     fs.stat("./result", function (err) {
       if (err && err.code == "ENOENT") {
-        fs.mkdirSync("result");
+        await fs.mkdirSync("result");
       }
     });
 
