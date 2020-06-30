@@ -1,9 +1,10 @@
-const { PDFDocument } = require('pdf-lib');
-const fs = require('fs');
+// const { PDFDocument } = require('pdf-lib');
+// const fs = require('fs');
 const {merge} = require('./actions/mergepdf');
 const {split} = require('./actions/split');
 const yargs = require('yargs'); 
 const { showHelp } = require('yargs');
+
 
 yargs.command({
     command: 'merge',

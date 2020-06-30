@@ -1,3 +1,4 @@
+try{
 const { PDFDocument } = require('pdf-lib');
 const fs = require('fs');
 
@@ -10,6 +11,13 @@ async function work(...arg) {
   const doc = await PDFDocument.create();
 
   for(let path of arg) {
+    try{
+      if(!fs.existsSync(`./pdf/${path}`)) 
+            throw(new Error('File does not exist'));
+    } catch(err) {
+      console.log(err.message);
+            process.exit(-1);
+    }
     const content = await PDFDocument.load(fs.readFileSync(`./pdf/${path}`));
     const contentPages = await doc.copyPages(content, content.getPageIndices());
   for (const page of contentPages) {
@@ -20,3 +28,7 @@ async function work(...arg) {
 }
 
 module.exports = {merge};
+} catch {
+  console.log(err);
+  process.exit(-1);
+}
