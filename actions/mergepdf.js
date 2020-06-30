@@ -35,6 +35,7 @@ try {
       }
     }
     fs.writeFileSync(`${resultPath}result.pdf`, await doc.save());
+    console.log(`saved ${resultPath}result.pdf`);
   }
 
   module.exports = { merge };
