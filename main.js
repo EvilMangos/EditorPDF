@@ -7,7 +7,7 @@ const { showHelp } = require('yargs');
 
 yargs.command({
     command: 'merge',
-    describe: 'Merge some pdf files',
+    describe: '--file="[name1,name2,...,nameN]" -Merge some pdf files',
     builder: {
       file: {
         describe: 'PDF file',
@@ -20,7 +20,7 @@ yargs.command({
 
     yargs.command({
     command: 'split',
-    describe: 'Split a pdf file',
+    describe: '--file="[name]" --number=[number] -Split a pdf file',
     builder: {
       file: {
         describe: 'PDF file',
@@ -35,6 +35,13 @@ yargs.command({
     },
     handler: (argv) => split(argv.file, argv.number)
   });
+
+  var argv = require('yargs')
+  .option('?', {
+      describe: 'Show help',
+      type: 'boolean'
+  })
+  .argv;
 
   var argv = require('yargs').argv;
   if(argv._[0] == '?') showHelp();
