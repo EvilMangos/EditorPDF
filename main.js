@@ -4,6 +4,11 @@ const { merge } = require("./actions/mergepdf");
 const { split } = require("./actions/split");
 const yargs = require("yargs");
 const { showHelp } = require("yargs");
+const { checkFolder } = require("./test/checkFolder");
+
+checkFolder("C:/EditorPDF", "EditorPDF");
+checkFolder("C:/EditorPDF/Result", "Result");
+checkFolder("C:/EditorPDF/PDF", "PDF");
 
 yargs.command({
   command: "merge",

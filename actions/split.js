@@ -1,6 +1,9 @@
 try {
   const { PDFDocument } = require("pdf-lib");
   const fs = require("fs");
+  const { checkFolder } = require("../test/checkFolder");
+  const resultPath = "C:/EditorPDF/Result/";
+  const sourcePdf = "C:/EditorPDF/PDF/";
 
   let split = (path, secondPart) =>
     work(path, secondPart).catch((err) => {
@@ -8,13 +11,7 @@ try {
     });
 
   async function work(path, lastPageFirstPart) {
-    path = `./pdf/${path}`;
-
-    fs.stat("./result", async function (err) {
-      if (err && err.code == "ENOENT") {
-        await fs.mkdirSync("result");
-      }
-    });
+    path = `${sourcePdf}${path}`;
 
     try {
       if (!fs.existsSync(path)) throw new Error("File does not exist");
@@ -49,8 +46,8 @@ try {
         secondPart.addPage(copiedPages2[i]);
       }
 
-      fs.writeFileSync("./result/firstPart.pdf", await firstPart.save());
-      fs.writeFileSync("./result/secondPart.pdf", await secondPart.save());
+      fs.writeFileSync(`${resultPath}firstPart.pdf`, await firstPart.save());
+      fs.writeFileSync(`${resultPath}secondPart.pdf`, await secondPart.save());
     }
   }
 
