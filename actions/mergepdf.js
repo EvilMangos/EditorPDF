@@ -13,7 +13,6 @@ try {
         fs.mkdirSync("result");
       }
     });
-    g;
 
     const doc = await PDFDocument.create();
 
