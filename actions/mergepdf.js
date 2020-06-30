@@ -18,7 +18,7 @@ try {
     for (let path of filesPaths) {
       try {
         if (!fs.existsSync(`${sourcePDF}${path}`))
-          throw new Error("File does not exist");
+          throw new Error(`File ${path} does not exist`);
       } catch (err) {
         console.log(err.message);
         process.exit(-1);
