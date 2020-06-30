@@ -8,7 +8,7 @@ try {
     });
 
   async function work(...filesPaths) {
-    fs.stat("./result", function (err) {
+    fs.stat("./result", async function (err) {
       if (err && err.code == "ENOENT") {
         await fs.mkdirSync("result");
       }
