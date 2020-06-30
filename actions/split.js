@@ -9,11 +9,11 @@ let split = (path, secondPart) => work(path, secondPart).catch(err => {
 async function work(path, lastPageFirstPart) {
     path = `./pdf/${path}`;
 
-    // fs.stat('./result', function(err) {
-    //     if (err && (err.code == 'ENOENT')) {
-    //         fs.mkdirSync('result');
-    //     }
-    // });
+    fs.stat('./result', function(err) {
+        if (err && (err.code == 'ENOENT')) {
+            fs.mkdirSync('result');
+        }
+    });
 
     try{
         if(!fs.existsSync(path)) 
