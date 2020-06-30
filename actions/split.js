@@ -10,7 +10,7 @@ try {
   async function work(path, lastPageFirstPart) {
     path = `./pdf/${path}`;
 
-    fs.stat("./result", function (err) {
+    fs.stat("./result", async function (err) {
       if (err && err.code == "ENOENT") {
         await fs.mkdirSync("result");
       }
