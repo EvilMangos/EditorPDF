@@ -42,6 +42,6 @@ var argv = require("yargs").option("?", {
 }).argv;
 
 var argv = require("yargs").argv;
-if (argv._[0] == "?") showHelp();
+if (argv._[0] == "?" || !argv._[0]) showHelp();
 
 yargs.parse();
