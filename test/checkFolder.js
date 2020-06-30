@@ -1,11 +1,13 @@
 const { PDFDocument } = require("pdf-lib");
 const fs = require("fs");
-let checkFolder = (path, name) => {
-  fs.stat(path, async function (err) {
-    if (err && err.code == "ENOENT") {
-      await fs.mkdirSync(name);
-    }
-  });
+let checkFolder = () => {
+  let checkFolder = (path) => {
+    fs.stat(path, async function (err) {
+      try {
+        if (err) await fs.mkdirSync(path);
+      } catch (err) {}
+    });
+  };
 };
 
 module.exports = { checkFolder };

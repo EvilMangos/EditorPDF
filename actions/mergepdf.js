@@ -1,9 +1,11 @@
 try {
   const { PDFDocument } = require("pdf-lib");
   const fs = require("fs");
-  const checkFolder = require("../test/checkFolder");
+  const { checkAllFolders } = require("../test/checkAllFolders");
   const resultPath = "C:/EditorPDF/Result/";
   const sourcePDF = "C:/EditorPDF/PDF/";
+
+  checkAllFolders();
 
   let merge = (...filesPaths) =>
     work(...filesPaths).catch((err) => {

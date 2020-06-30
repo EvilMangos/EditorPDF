@@ -1,9 +1,11 @@
 try {
   const { PDFDocument } = require("pdf-lib");
   const fs = require("fs");
-  const { checkFolder } = require("../test/checkFolder");
+  const { checkAllFolders } = require("../test/checkAllFolders");
   const resultPath = "C:/EditorPDF/Result/";
   const sourcePdf = "C:/EditorPDF/PDF/";
+
+  checkAllFolders();
 
   let split = (path, secondPart) =>
     work(path, secondPart).catch((err) => {
@@ -30,7 +32,7 @@ try {
       if (mainPDF.getPages().length <= lastPageFirstPart)
         throw new Error("А number is too large");
       if (lastPageFirstPart < 1) throw new Error("A number is too small");
-    } catch {
+    } catch (err) {
       console.log(err.message);
       process.exit(-1);
     }
