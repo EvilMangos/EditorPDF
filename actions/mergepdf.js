@@ -2,12 +2,12 @@ try {
   const { PDFDocument } = require("pdf-lib");
   const fs = require("fs");
 
-  let merge = (...arg) =>
-    work(...arg).catch((err) => {
+  let merge = (...filesPaths) =>
+    work(...filesPaths).catch((err) => {
       console.log(err);
     });
 
-  async function work(...arg) {
+  async function work(...filesPaths) {
     fs.stat("./result", function (err) {
       if (err && err.code == "ENOENT") {
         await fs.mkdirSync("result");
@@ -16,7 +16,7 @@ try {
 
     const doc = await PDFDocument.create();
 
-    for (let path of arg) {
+    for (let path of filesPaths) {
       try {
         if (!fs.existsSync(`./pdf/${path}`))
           throw new Error("File does not exist");
