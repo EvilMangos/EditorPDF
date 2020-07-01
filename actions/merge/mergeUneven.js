@@ -1,9 +1,9 @@
 try {
   const { PDFDocument } = require("pdf-lib");
   const fs = require("fs");
+  const { isExact } = require("../../test/isExist");
 
   let mergeUneven = (source, out, filesNames, range) => {
-    //checkFolder(out);
     work(source, out, filesNames, range).catch((err) => {
       console.log(err);
     });
@@ -12,13 +12,7 @@ try {
   async function work(source, out, filesNames, range) {
     const doc = await PDFDocument.create();
     for (let name of filesNames) {
-      try {
-        if (!fs.existsSync(`${source}${name}`))
-          throw new Error(`File ${name} does not exist`);
-      } catch (err) {
-        console.log(err);
-        process.exit(-1);
-      }
+      isExact(`${source}${name}`);
     }
     range = range.map((value) => value.split(""));
     range.forEach((element) => {

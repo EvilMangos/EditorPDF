@@ -1,11 +1,8 @@
-// const { PDFDocument } = require('pdf-lib');
-// const fs = require('fs');
-const { merge } = require("./actions/mergepdf");
+const { mergeUniform } = require("./actions/merge/mergeUniform");
 const { splitNumber } = require("./actions/split/splitNumber");
 const { splitN } = require("./actions/split/splitN");
 const yargs = require("yargs");
 const { showHelp } = require("yargs");
-//const { checkFolder } = require("./test/checkFolder");
 const { mergeUneven } = require("./actions/merge/mergeUneven");
 
 function inOut(describe) {
@@ -37,7 +34,6 @@ yargs.command({
     source: inOut(describeSource),
   },
   handler: (argv) => {
-    //checkFolder(argv.out),
     if (argv.range) {
       mergeUneven(
         argv.source,
@@ -71,7 +67,6 @@ yargs.command({
   },
   handler: (argv) => {
     try {
-      //checkFolder(argv.out.slice(0, -1));
       if (argv.n) {
         splitN(argv.source, argv.out, argv.n);
       } else if (argv.number) {

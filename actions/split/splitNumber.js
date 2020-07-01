@@ -1,11 +1,9 @@
 try {
   const { PDFDocument } = require("pdf-lib");
   const fs = require("fs");
-  //const { checkFolder } = require("../../test/checkFolder");
-  //const { checkAllFolders } = require("../test/checkAllFolders");
+  const { isExact } = require("../../test/isExist");
 
   let splitNumber = (source, out, secondPart) => {
-    // checkFolder(out);
     work(source, out, secondPart).catch((err) => {
       console.log(err);
     });
@@ -14,12 +12,7 @@ try {
   async function work(source, out, lastPageFirstPart) {
     let path = `${source}`;
 
-    try {
-      if (!fs.existsSync(path)) throw new Error(`File ${path} does not exist`);
-    } catch (err) {
-      console.log(err.message);
-      process.exit(-1);
-    }
+    isExact(source);
 
     const mainPDF = await PDFDocument.load(fs.readFileSync(path));
 
