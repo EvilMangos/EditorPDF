@@ -36,7 +36,7 @@ try {
       );
     }
 
-    savePDF(mainPDF, `${out}${i + 1}PDF.pdf`, pageIndices);
+    savePDF(mainPDF, `${out}${i}PDF.pdf`, pageIndices);
   }
 
   module.exports = { splitN };
