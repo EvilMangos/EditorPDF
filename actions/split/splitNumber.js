@@ -2,6 +2,7 @@ try {
   const { PDFDocument } = require("pdf-lib");
   const fs = require("fs");
   const { isExact } = require("../../test/isExist");
+  const { savePDF } = require("../savePDF");
 
   let splitNumber = (source, out, secondPart) => {
     work(source, out, secondPart).catch((err) => {
@@ -37,17 +38,6 @@ try {
       `${out}secondPart.pdf`,
       pageIndices.slice(lastPageFirstPart + 1)
     );
-  }
-
-  async function savePDF(sourcePDF, filePath, pageIndices) {
-    const pdf = await PDFDocument.create();
-    const pages = await pdf.copyPages(sourcePDF, pageIndices);
-    for (const page of pages) pdf.addPage(page);
-
-    fs.writeFile(filePath, await pdf.save(), function (err) {
-      if (err) return console.log(err);
-      console.log(`saved ${filePath}`);
-    });
   }
 
   module.exports = { splitNumber };
