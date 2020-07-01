@@ -1,19 +1,20 @@
 try {
   const { PDFDocument } = require("pdf-lib");
   const fs = require("fs");
-  const { checkAllFolders } = require("../test/checkAllFolders");
-  const resultPath = "C:/EditorPDF/Result/";
-  const sourcePdf = "C:/EditorPDF/PDF/";
+  const { checkFolder } = require("../test/checkFolder");
+  //const { checkAllFolders } = require("../test/checkAllFolders");
 
-  checkAllFolders();
+  let split = (source, out, secondPart) => {
+    //
 
-  let split = (path, secondPart) =>
-    work(path, secondPart).catch((err) => {
+    checkFolder(out);
+    work(source, out, secondPart).catch((err) => {
       console.log(err);
     });
+  };
 
-  async function work(path, lastPageFirstPart) {
-    path = `${sourcePdf}${path}`;
+  async function work(source, out, lastPageFirstPart) {
+    let path = `${source}`;
 
     try {
       if (!fs.existsSync(path)) throw new Error(`File ${path} does not exist`);
@@ -37,12 +38,12 @@ try {
 
     await savePDF(
       mainPDF,
-      `${resultPath}firstPart.pdf`,
+      `${out}/firstPart.pdf`,
       pageIndices.slice(0, lastPageFirstPart - 1)
     );
     await savePDF(
       mainPDF,
-      `${resultPath}secondPart.pdf`,
+      `${out}/secondPart.pdf`,
       pageIndices.slice(lastPageFirstPart)
     );
   }
@@ -63,64 +64,3 @@ try {
   console.log(err);
   process.exit(-1);
 }
-
-// try {
-//   const { PDFDocument } = require("pdf-lib");
-//   const fs = require("fs");
-//   const { checkAllFolders } = require("../test/checkAllFolders");
-//   const resultPath = "C:/EditorPDF/Result/";
-//   const sourcePdf = "C:/EditorPDF/PDF/";
-
-//   checkAllFolders();
-
-//   let split = (path, secondPart) =>
-//     work(path, secondPart).catch((err) => {
-//       console.log(err);
-//     });
-
-//   async function work(path, lastPageFirstPart) {
-//     path = `${sourcePdf}${path}`;
-
-//     try {
-//       if (!fs.existsSync(path)) throw new Error("File does not exist");
-//     } catch (err) {
-//       console.log(err.message);
-//       process.exit(-1);
-//     }
-//     const mainPDF = await PDFDocument.load(fs.readFileSync(path));
-//     const firstPart = await PDFDocument.create();
-//     const secondPart = await PDFDocument.create();
-//     const copiedPages = await firstPart.copyPages(
-//       mainPDF,
-//       mainPDF.getPageIndices()
-//     );
-//     try {
-//       if (mainPDF.getPages().length <= lastPageFirstPart)
-//         throw new Error("А number is too large");
-//       if (lastPageFirstPart < 1) throw new Error("A number is too small");
-//     } catch (err) {
-//       console.log(err.message);
-//       process.exit(-1);
-//     }
-
-//     for (let i = 0; i < lastPageFirstPart; i++) {
-//       firstPart.addPage(copiedPages[i]);
-
-//       copiedPages2 = await secondPart.copyPages(
-//         mainPDF,
-//         mainPDF.getPageIndices()
-//       );
-//       for (let i = lastPageFirstPart; i < mainPDF.getPages().length; i++) {
-//         secondPart.addPage(copiedPages2[i]);
-//       }
-
-//       fs.writeFile(`${resultPath}firstPart.pdf`, await firstPart.save());
-//       fs.writeFile(`${resultPath}secondPart.pdf`, await secondPart.save());
-//     }
-//   }
-
-//   module.exports = { split };
-// } catch {
-//   console.log(err);
-//   process.exit(-1);
-// }

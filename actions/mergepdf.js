@@ -1,30 +1,31 @@
 try {
   const { PDFDocument } = require("pdf-lib");
   const fs = require("fs");
-  const { checkAllFolders } = require("../test/checkAllFolders");
-  const resultPath = "C:/EditorPDF/Result/";
-  const sourcePDF = "C:/EditorPDF/PDF/";
+  const { checkFolder } = require("../test/checkFolder");
+  //const { checkAllFolders } = require("../test/checkAllFolders");
 
-  checkAllFolders();
+  checkFolder;
 
-  let merge = (...filesPaths) =>
-    work(...filesPaths).catch((err) => {
+  let merge = (source, out, ...filesNames) => {
+    //checkFolder(out);
+    work(source, out, ...filesNames).catch((err) => {
       console.log(err);
     });
+  };
 
-  async function work(...filesPaths) {
+  async function work(source, out, ...filesNames) {
     const doc = await PDFDocument.create();
 
-    for (let path of filesPaths) {
+    for (let name of filesNames) {
       try {
-        if (!fs.existsSync(`${sourcePDF}${path}`))
-          throw new Error(`File ${path} does not exist`);
+        if (!fs.existsSync(`${source}${name}`))
+          throw new Error(`File ${name} does not exist`);
       } catch (err) {
         console.log(err.message);
         process.exit(-1);
       }
       const content = await PDFDocument.load(
-        fs.readFileSync(`${sourcePDF}${path}`)
+        fs.readFileSync(`${source}${name}`)
       );
       const contentPages = await doc.copyPages(
         content,
@@ -34,8 +35,8 @@ try {
         doc.addPage(page);
       }
     }
-    fs.writeFileSync(`${resultPath}result.pdf`, await doc.save());
-    console.log(`saved ${resultPath}result.pdf`);
+    fs.writeFileSync(`${out}result.pdf`, await doc.save());
+    console.log(`saved ${out}result.pdf`);
   }
 
   module.exports = { merge };
