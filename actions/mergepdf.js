@@ -4,8 +4,6 @@ try {
   const { checkFolder } = require("../test/checkFolder");
   //const { checkAllFolders } = require("../test/checkAllFolders");
 
-  checkFolder;
-
   let merge = (source, out, ...filesNames) => {
     //checkFolder(out);
     work(source, out, ...filesNames).catch((err) => {
@@ -21,7 +19,7 @@ try {
         if (!fs.existsSync(`${source}${name}`))
           throw new Error(`File ${name} does not exist`);
       } catch (err) {
-        console.log(err.message);
+        console.log(err);
         process.exit(-1);
       }
       const content = await PDFDocument.load(

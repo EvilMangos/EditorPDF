@@ -1,13 +1,11 @@
 try {
   const { PDFDocument } = require("pdf-lib");
   const fs = require("fs");
-  const { checkFolder } = require("../test/checkFolder");
+  //const { checkFolder } = require("../../test/checkFolder");
   //const { checkAllFolders } = require("../test/checkAllFolders");
 
-  let split = (source, out, secondPart) => {
-    //
-
-    checkFolder(out);
+  let splitNumber = (source, out, secondPart) => {
+    // checkFolder(out);
     work(source, out, secondPart).catch((err) => {
       console.log(err);
     });
@@ -38,13 +36,13 @@ try {
 
     await savePDF(
       mainPDF,
-      `${out}/firstPart.pdf`,
-      pageIndices.slice(0, lastPageFirstPart - 1)
+      `${out}firstPart.pdf`,
+      pageIndices.slice(0, lastPageFirstPart)
     );
     await savePDF(
       mainPDF,
-      `${out}/secondPart.pdf`,
-      pageIndices.slice(lastPageFirstPart)
+      `${out}secondPart.pdf`,
+      pageIndices.slice(lastPageFirstPart + 1)
     );
   }
 
@@ -59,7 +57,7 @@ try {
     });
   }
 
-  module.exports = { split };
+  module.exports = { splitNumber };
 } catch {
   console.log(err);
   process.exit(-1);

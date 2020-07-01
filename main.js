@@ -1,7 +1,8 @@
 // const { PDFDocument } = require('pdf-lib');
 // const fs = require('fs');
 const { merge } = require("./actions/mergepdf");
-const { split } = require("./actions/split");
+const { splitNumber } = require("./actions/split/splitNumber");
+const { splitN } = require("./actions/split/splitN");
 const yargs = require("yargs");
 const { showHelp } = require("yargs");
 const { checkFolder } = require("./test/checkFolder");
@@ -37,20 +38,33 @@ yargs.command({
 
 yargs.command({
   command: "split",
-  describe:
-    '--source="[path]" --out="[path]" --number=[number] -Split a pdf file',
+  describe: `--source="[path]" --out="[path]" --number=[number] -Split a pdf file to 2 part
+  --source="[path]" --out="[path]" --n=[number] -Split a pdf file with n pages in a file`,
   builder: {
     number: {
       describe: "First page of the second part after split",
-      demandOption: true,
+      demandOption: false,
+      type: "number",
+    },
+    n: {
+      describe: "How much pages in 1 file",
+      demandOption: false,
       type: "number",
     },
     out: inOut(describeOut),
     source: inOut(describeSource),
   },
   handler: (argv) => {
-    checkFolder(argv.out.slice(0, -1));
-    split(argv.source, argv.out, argv.number);
+    try {
+      checkFolder(argv.out.slice(0, -1));
+      if (argv.n) {
+        splitN(argv.source, argv.out, argv.n);
+      } else if (argv.number) {
+        splitNumber(argv.source, argv.out, argv.number);
+      } else throw new Error("Need more parameters");
+    } catch (err) {
+      console.log(err);
+    }
   },
 });
 
@@ -63,3 +77,5 @@ var argv = require("yargs").argv;
 if (argv._[0] == "?" || !argv._[0]) showHelp();
 
 yargs.parse();
+
+//splitN("C:/PDF/3.pdf", "./result/", 3);
