@@ -36,7 +36,6 @@ try {
       const content = await PDFDocument.load(
         fs.readFileSync(`${source}${filesNames[i]}`)
       );
-      //var indices = content.getPageIndices();
       let indices = createPageIndices(range[i], content);
       const pages = await pdf.copyPages(content, indices);
       for (const page of pages) pdf.addPage(page);
@@ -44,6 +43,7 @@ try {
     fs.writeFile(out, await pdf.save(), function (err) {
       if (err) throw err;
     });
+    console.log(`saved ${out}result.pdf`);
   }
 
   module.exports = {
