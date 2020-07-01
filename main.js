@@ -5,7 +5,8 @@ const { splitNumber } = require("./actions/split/splitNumber");
 const { splitN } = require("./actions/split/splitN");
 const yargs = require("yargs");
 const { showHelp } = require("yargs");
-const { checkFolder } = require("./test/checkFolder");
+//const { checkFolder } = require("./test/checkFolder");
+const { mergeUneven } = require("./actions/merge/mergeUneven");
 
 function inOut(describe) {
   return {
@@ -27,12 +28,26 @@ yargs.command({
       demandOption: true,
       type: "string",
     },
+    range: {
+      describe: "How much pages in 1 file",
+      demandOption: false,
+      type: "string",
+    },
     out: inOut(describeOut),
     source: inOut(describeSource),
   },
   handler: (argv) => {
-    checkFolder(argv.out),
-      merge(argv.source, argv.out, ...argv.file.split(","));
+    //checkFolder(argv.out),
+    if (argv.range) {
+      mergeUneven(
+        argv.source,
+        argv.out,
+        argv.file.split(","),
+        argv.range.split(",")
+      );
+    } else {
+      mergeUniform(argv.source, argv.out, argv.file.split(","));
+    }
   },
 });
 
@@ -56,7 +71,7 @@ yargs.command({
   },
   handler: (argv) => {
     try {
-      checkFolder(argv.out.slice(0, -1));
+      //checkFolder(argv.out.slice(0, -1));
       if (argv.n) {
         splitN(argv.source, argv.out, argv.n);
       } else if (argv.number) {
@@ -77,5 +92,3 @@ var argv = require("yargs").argv;
 if (argv._[0] == "?" || !argv._[0]) showHelp();
 
 yargs.parse();
-
-//splitN("C:/PDF/3.pdf", "./result/", 3);
