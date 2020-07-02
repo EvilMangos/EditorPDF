@@ -23,7 +23,7 @@ try {
     }
 
     var pageIndices = mainPDF.getPageIndices();
-    let i;
+    let i = 1;
     for (
       i = 1;
       pageIndices.length > countPagesInFile;
