@@ -25,7 +25,7 @@ try {
     var pageIndices = mainPDF.getPageIndices();
     let i = 1;
     for (
-      i = 1;
+      ;
       pageIndices.length > countPagesInFile;
       i++, pageIndices = pageIndices.slice(countPagesInFile)
     ) {
