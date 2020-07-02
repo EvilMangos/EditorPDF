@@ -18,10 +18,7 @@ const describeOut = `set result folder`;
 yargs.command({
   command: "merge",
   describe: `--source="[path]" --out="[path]" --file="[name1,name2,...,nameN]" 
-  -Merge some pdf files
-    --source="[path]" --out="[path]" --file="[name1,name2,...,nameN]"
-     --range="[number1]-[number2],[number3],..." -Merge some pdf files
-      with different count of pages`,
+  -Merge some pdf files --source="[path]" --out="[path]" --file="[name1,name2,...,nameN]" --range="[number1]-[number2],[number3],..." -Merge some pdf files with different count of pages`,
   builder: {
     file: {
       describe: "PDF file",
@@ -88,5 +85,3 @@ var argv = require("yargs").option("?", {
 
 var argv = require("yargs").argv;
 if (argv._[0] == "?" || !argv._[0]) showHelp();
-
-yargs.parse();
