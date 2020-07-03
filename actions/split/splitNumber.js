@@ -1,19 +1,20 @@
 try {
   const { PDFDocument } = require("pdf-lib");
   const fs = require("fs");
-  const { isExact } = require("../../test/isExist");
-  const { savePDF } = require("../savePDF");
+  const { isExist } = require("../../test/isExist");
+  const { savePDF } = require("../another functions/savePDF");
 
   let splitNumber = (source, out, secondPart) => {
     work(source, out, secondPart).catch((err) => {
       console.log(err);
+      process.exit(-1);
     });
   };
 
   async function work(source, out, lastPageFirstPart) {
     let path = `${source}`;
 
-    isExact(source);
+    isExist(source);
 
     const mainPDF = await PDFDocument.load(fs.readFileSync(path));
 

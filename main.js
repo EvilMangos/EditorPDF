@@ -4,6 +4,7 @@ const { splitN } = require("./actions/split/splitN");
 const yargs = require("yargs");
 const { showHelp } = require("yargs");
 const { mergeUneven } = require("./actions/merge/mergeUneven");
+const { splitRange } = require("./actions/split/splitRange");
 
 function inOut(describe) {
   return {
@@ -73,11 +74,13 @@ yargs.command({
   },
   handler: (argv) => {
     try {
-      if (argv.n) {
+      if (argv.range) {
+        splitRange(argv.source, argv.out, argv.range.split(","));
+      } else if (argv.n) {
         splitN(argv.source, argv.out, argv.n);
       } else if (argv.number) {
         splitNumber(argv.source, argv.out, argv.number);
-      } else throw new Error("Need more parameters");
+      } else throw new Error("Invalid parameters");
     } catch (err) {
       console.log(err);
     }

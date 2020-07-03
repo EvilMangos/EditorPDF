@@ -1,11 +1,12 @@
 try {
   const { PDFDocument } = require("pdf-lib");
   const fs = require("fs");
-  const { isExact } = require("../../test/isExist");
+  const { isExist } = require("../../test/isExist");
 
   let mergeUniform = (source, out, ...filesNames) => {
     work(source, out, ...filesNames).catch((err) => {
       console.log(err);
+      process.exit(-1);
     });
   };
 
@@ -13,7 +14,7 @@ try {
     const doc = await PDFDocument.create();
 
     for (let name of filesNames) {
-      isExact(`${source}${name}`);
+      isExist(`${source}${name}`);
       const content = await PDFDocument.load(
         fs.readFileSync(`${source}${name}`)
       );
