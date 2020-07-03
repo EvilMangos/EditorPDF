@@ -11,15 +11,16 @@ let testRange = function (range) {
         ) {
           throw new Error("Invalid range value");
         } else {
-          return;
+          return false;
         }
       } else {
         if (!+isFinite(element)) throw new Error("Invalid range value");
-        else return;
+        else return false;
       }
     });
     return true;
   } catch (err) {
+    return false;
     console.log(err);
     process.exit(-1);
   }

@@ -38,9 +38,11 @@ describe("testRange", function () {
     assert.equal(result, expectedResult);
   });
 
-  // it("Range = 5-3", function () {
-  //   let expectedResult = true;
-  //   let result = testRange("5-3");
-  //   assert.equal(result, expectedResult);
-  // });
+  it("Range = 5-3", function () {
+    let expectedResult = false;
+    let range = "5-3".split(",");
+    range = range.map((elem) => elem.split(""));
+    let result = testRange(range);
+    assert.notStrictEqual(result, expectedResult);
+  });
 });
