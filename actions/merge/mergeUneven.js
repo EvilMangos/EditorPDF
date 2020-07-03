@@ -18,12 +18,10 @@ try {
     range.forEach((element) => {
       if (element.length === 3) {
         if (
-          !isFinite(
-            element[0] ||
-              !isFinite(element[2]) ||
-              element[1] !== "-" ||
-              element[0] > element[2]
-          )
+          !isFinite(element[0]) ||
+          !isFinite(element[2]) ||
+          element[1] !== "-" ||
+          element[0] > element[2]
         )
           throw new Error("Invalid range value");
       } else {

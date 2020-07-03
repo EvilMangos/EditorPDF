@@ -50,7 +50,8 @@ yargs.command({
 yargs.command({
   command: "split",
   describe: `--source="[path]" --out="[path]" --number=[number] -Split a pdf file to 2 part
-  --source="[path]" --out="[path]" --n=[number] -Split a pdf file with n pages in a file`,
+  --source="[path]" --out="[path]" --n=[number] -Split a pdf file with n pages in a file
+  --source="[path]" --out="[path]" --range="[number1]-[number2],[number3],..." -Split a pad file by the range`,
   builder: {
     number: {
       describe: "First page of the second part after split",
@@ -61,6 +62,11 @@ yargs.command({
       describe: "How much pages in 1 file",
       demandOption: false,
       type: "number",
+    },
+    range: {
+      describe: "How to split a file",
+      demandOption: false,
+      type: "string",
     },
     out: inOut(describeOut),
     source: inOut(describeSource),
