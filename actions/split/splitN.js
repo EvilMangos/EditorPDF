@@ -25,14 +25,15 @@ try {
     var pageIndices = mainPDF.getPageIndices();
     let i = 1,
       from = 0,
-      to = countPagesInFile;
+      to = countPagesInFile,
+      pathToSave = (i) => `${out}${i}PDF.pdf`;
     for (; to < pageIndices.length; i++, from = to, to += countPagesInFile) {
-      savePDF(mainPDF, `${out}${i}PDF.pdf`, pageIndices.slice(from, to));
-      console.log(`Saved: ${`${out}${i}PDF.pdf`}`);
+      savePDF(mainPDF, pathToSave(i), pageIndices.slice(from, to));
+      console.log(`Saved: ${pathToSave(i)}`);
     }
 
-    savePDF(mainPDF, `${out}${i}PDF.pdf`, pageIndices.slice(from, to));
-    console.log(`Saved: ${`${out}${i}PDF.pdf`}`);
+    savePDF(mainPDF, pathToSave(i), pageIndices.slice(from, to));
+    console.log(`Saved: ${pathToSave(i)}`);
   }
 
   module.exports = { splitN };
