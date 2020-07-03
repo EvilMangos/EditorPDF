@@ -1,6 +1,6 @@
 const fs = require("fs");
 
-function isExact(source) {
+function isExist(source) {
   try {
     if (!fs.existsSync(source)) throw new Error(`File ${name} does not exist`);
   } catch (err) {
