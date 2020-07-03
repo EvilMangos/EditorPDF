@@ -4,18 +4,21 @@ let testRange = function (range) {
     range.forEach((element) => {
       if (element.length === 3) {
         if (
-          !isFinite(element[0]) ||
-          !isFinite(element[2]) ||
+          !isFinite(+element[0]) ||
+          !isFinite(+element[2]) ||
           element[1] !== "-" ||
-          element[0] > element[2]
-        )
+          +element[0] > +element[2]
+        ) {
           throw new Error("Invalid range value");
-        else return;
+        } else {
+          return;
+        }
       } else {
-        if (!isFinite(element)) throw new Error("Invalid range value");
+        if (!+isFinite(element)) throw new Error("Invalid range value");
         else return;
       }
     });
+    return true;
   } catch (err) {
     console.log(err);
     process.exit(-1);

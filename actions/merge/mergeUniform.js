@@ -3,14 +3,14 @@ try {
   const fs = require("fs");
   const { isExist } = require("../../test/isExist");
 
-  let mergeUniform = (source, out, ...filesNames) => {
-    work(source, out, ...filesNames).catch((err) => {
+  let mergeUniform = (source, out, filesNames) => {
+    work(source, out, filesNames).catch((err) => {
       console.log(err);
       process.exit(-1);
     });
   };
 
-  async function work(source, out, ...filesNames) {
+  async function work(source, out, filesNames) {
     const doc = await PDFDocument.create();
 
     for (let name of filesNames) {
@@ -26,8 +26,8 @@ try {
         doc.addPage(page);
       }
     }
-    fs.writeFileSync(`${out}result.pdf`, await doc.save());
-    console.log(`saved ${out}result.pdf`);
+    fs.writeFileSync(out, await doc.save());
+    console.log(`saved ${out}`);
   }
 
   module.exports = { mergeUniform };

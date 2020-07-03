@@ -31,7 +31,7 @@ try {
     fs.writeFile(out, await pdf.save(), function (err) {
       if (err) throw err;
     });
-    console.log(`saved ${out}result.pdf`);
+    console.log(`saved ${out}`);
   }
 
   module.exports = {

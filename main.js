@@ -94,3 +94,5 @@ var argv = require("yargs").option("?", {
 
 var argv = require("yargs").argv;
 if (argv._[0] == "?" || !argv._[0]) showHelp();
+
+//mergeUniform("C:/PDF/", "./result/result.pdf", "3.pdf,4.pdf".split(","));
