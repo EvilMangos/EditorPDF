@@ -10,5 +10,5 @@ function isExact(source) {
 }
 
 module.exports = {
-  isExact,
+  isExist,
 };
