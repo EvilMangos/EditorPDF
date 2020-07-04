@@ -13,6 +13,7 @@ try {
   };
 
   async function work(source, out, range) {
+    isExist(source);
     const mainPDF = await PDFDocument.load(fs.readFileSync(source));
     range = range.map((value) => value.split("-"));
     testRange(range);
@@ -20,11 +21,11 @@ try {
     let pathToSave = (i) => `${out}${i}PDF.pdf`;
     for (let i = 0; i < range.length; i++) {
       let limits = range[i];
-      if (limits.length == 1) limits[2] = +limits[0];
+      if (limits.length == 1) limits[1] = +limits[0];
       savePDF(
         mainPDF,
         pathToSave(i + 1),
-        pageIndices.slice(limits[0] - 1, +limits[2])
+        pageIndices.slice(limits[0] - 1, +limits[1])
       );
       console.log(`Saved: ${pathToSave(i + 1)}`);
     }
