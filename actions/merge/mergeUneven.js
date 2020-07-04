@@ -16,8 +16,8 @@ try {
     for (let name of filesNames) {
       isExist(`${source}${name}`);
     }
-    range = range.map((value) => value.split(""));
-    testRange(range);
+    range = range.map((value) => value.split("-"));
+    if (!testRange(range)) throw new Error("Invalid range value");
     const pdf = await PDFDocument.create();
     for (let i = 0; i < filesNames.length; i++) {
       if (filesNames[i] === undefined) break;
@@ -42,7 +42,7 @@ try {
     let indices = source.getPageIndices();
     if (elem.length == 1) return [indices[+elem - 1]];
 
-    return indices.slice(elem[0] - 1, elem[2]);
+    return indices.slice(elem[0] - 1, elem[1]);
   }
 } catch (err) {
   console.log(err);

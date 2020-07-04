@@ -2,12 +2,11 @@ let testRange = function (range) {
   try {
     if (!Array.isArray(range)) throw new Error("Invalid range value");
     range.forEach((element) => {
-      if (element.length === 3) {
+      if (element.length === 2) {
         if (
           !isFinite(+element[0]) ||
-          !isFinite(+element[2]) ||
-          element[1] !== "-" ||
-          +element[0] > +element[2]
+          !isFinite(+element[1]) ||
+          +element[0] > +element[1]
         ) {
           throw new Error("Invalid range value");
         } else {
@@ -21,8 +20,8 @@ let testRange = function (range) {
     return true;
   } catch (err) {
     return false;
-    console.log(err);
-    process.exit(-1);
+    // console.log(err);
+    // process.exit(-1);
   }
 };
 

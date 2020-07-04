@@ -14,7 +14,7 @@ try {
 
   async function work(source, out, range) {
     const mainPDF = await PDFDocument.load(fs.readFileSync(source));
-    range = range.map((value) => value.split(""));
+    range = range.map((value) => value.split("-"));
     testRange(range);
     var pageIndices = mainPDF.getPageIndices();
     let pathToSave = (i) => `${out}${i}PDF.pdf`;
