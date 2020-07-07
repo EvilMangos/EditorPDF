@@ -10,7 +10,7 @@ describe("getRange", function () {
   });
 
   it("Range = 5-3 should return false", function () {
-    let expectedResult = JSON.stringify([[5, 6, 8]]);
+    let expectedResult = JSON.stringify([[2, 3, 4]]);
     let range = "5-3";
     let result = JSON.stringify(getRange(range));
     assert.equal(result, expectedResult);
