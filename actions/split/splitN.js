@@ -1,8 +1,8 @@
 try {
   const { PDFDocument } = require("pdf-lib");
   const fs = require("fs");
-  const { isExist } = require("../../test/isExist");
-  const { savePDF } = require("../another functions/savePDF");
+  const { isExist } = require("../../utility/isExist");
+  const { savePDF } = require("../../utility/savePDF");
 
   let splitN = (source, out, countPagesInFile) => {
     work(source, out, countPagesInFile).catch((err) => {

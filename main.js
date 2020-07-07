@@ -75,7 +75,7 @@ yargs.command({
   handler: (argv) => {
     try {
       if (argv.range) {
-        splitRange(argv.source, argv.out, argv.range.split(","));
+        splitRange(argv.source, argv.out, argv.range);
       } else if (argv.n) {
         splitN(argv.source, argv.out, argv.n);
       } else if (argv.number) {

@@ -1,8 +1,7 @@
 try {
   const { PDFDocument } = require("pdf-lib");
   const fs = require("fs");
-  const { isExist } = require("../../test/isExist");
-  const { testRange } = require("../../test/testRange");
+  const { isExist } = require("../../utility/isExist");
 
   let mergeUneven = (source, out, filesNames, range) => {
     work(source, out, filesNames, range).catch((err) => {
@@ -17,7 +16,6 @@ try {
       isExist(`${source}${name}`);
     }
     range = range.map((value) => value.split("-"));
-    if (!testRange(range)) throw new Error("Invalid range value");
     const pdf = await PDFDocument.create();
     for (let i = 0; i < filesNames.length; i++) {
       if (filesNames[i] === undefined) break;

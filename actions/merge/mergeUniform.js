@@ -1,8 +1,7 @@
 try {
   const { PDFDocument } = require("pdf-lib");
   const fs = require("fs");
-  const { isExist } = require("../../test/isExist");
-
+  const { isExist } = require("../../utility/isExist");
   let mergeUniform = (source, out, filesNames) => {
     work(source, out, filesNames).catch((err) => {
       console.log(err);
