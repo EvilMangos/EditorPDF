@@ -1,19 +1,18 @@
 var assert = require("assert");
+const { getRange } = require("../utility/getRange");
 
-describe("testRange", function () {
-  it("Range = 1-3,4,6-8", function () {
-    let expectedResult = true;
-    let range = "1-3,4,6-8".split(",");
-    range = range.map((elem) => elem.split("-"));
-    let result = testRange(range);
+describe("getRange", function () {
+  it("Range = 1-3,4,6-8 should return true", function () {
+    let expectedResult = JSON.stringify([[0, 1, 2], [3], [5, 6, 7]]);
+    let range = "1-3,4,6-8";
+    let result = JSON.stringify(getRange(range));
     assert.equal(result, expectedResult);
   });
 
-  it("Range = 5-3", function () {
-    let expectedResult = false;
-    let range = "5-3".split(",");
-    range = range.map((elem) => elem.split("-"));
-    let result = testRange(range);
-    assert.notStrictEqual(result, expectedResult);
+  it("Range = 5-3 should return false", function () {
+    let expectedResult = JSON.stringify([[5, 6, 8]]);
+    let range = "5-3";
+    let result = JSON.stringify(getRange(range));
+    assert.equal(result, expectedResult);
   });
 });
