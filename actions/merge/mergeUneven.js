@@ -1,4 +1,5 @@
 try {
+  const { getRange } = require("../../utility/getRange");
   const { PDFDocument } = require("pdf-lib");
   const fs = require("fs");
   const { isExist } = require("../../utility/isExist");
@@ -11,19 +12,17 @@ try {
   };
 
   async function work(source, out, filesNames, range) {
-    const doc = await PDFDocument.create();
     for (let name of filesNames) {
       isExist(`${source}${name}`);
     }
-    range = range.map((value) => value.split("-"));
+    range = getRange(range);
     const pdf = await PDFDocument.create();
     for (let i = 0; i < filesNames.length; i++) {
       if (filesNames[i] === undefined) break;
       const content = await PDFDocument.load(
         fs.readFileSync(`${source}${filesNames[i]}`)
       );
-      let indices = createPageIndices(range[i], content);
-      const pages = await pdf.copyPages(content, indices);
+      const pages = await pdf.copyPages(content, range[i]);
       for (const page of pages) pdf.addPage(page);
     }
     fs.writeFile(out, await pdf.save(), function (err) {
@@ -35,13 +34,6 @@ try {
   module.exports = {
     mergeUneven,
   };
-
-  function createPageIndices(elem, source) {
-    let indices = source.getPageIndices();
-    if (elem.length == 1) return [indices[+elem - 1]];
-
-    return indices.slice(elem[0] - 1, elem[1]);
-  }
 } catch (err) {
   console.log(err);
   process.exit(-1);

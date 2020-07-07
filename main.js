@@ -36,12 +36,7 @@ yargs.command({
   },
   handler: (argv) => {
     if (argv.range) {
-      mergeUneven(
-        argv.source,
-        argv.out,
-        argv.file.split(","),
-        argv.range.split(",")
-      );
+      mergeUneven(argv.source, argv.out, argv.file.split(","), argv.range);
     } else {
       mergeUniform(argv.source, argv.out, argv.file.split(","));
     }
@@ -94,5 +89,3 @@ var argv = require("yargs").option("?", {
 
 var argv = require("yargs").argv;
 if (argv._[0] == "?" || !argv._[0]) showHelp();
-
-//mergeUniform("C:/PDF/", "./result/result.pdf", "3.pdf,4.pdf".split(","));

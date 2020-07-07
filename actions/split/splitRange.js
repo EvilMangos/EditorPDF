@@ -16,7 +16,6 @@ try {
     isExist(source);
     const mainPDF = await PDFDocument.load(fs.readFileSync(source));
     let pathToSave = (i) => `${out}${i}PDF.pdf`;
-    // var pageIndices = mainPDF.getPageIndices();
     range = getRange(range);
     for (let i = 0; i < range.length; i++) {
       savePDF(mainPDF, pathToSave(i + 1), range[i]);
