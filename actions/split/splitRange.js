@@ -8,14 +8,14 @@ try {
   let splitRange = (source, out, range) => {
     work(source, out, range).catch((err) => {
       console.log(err);
-      process.exit(-1);
+      process.exit();
     });
   };
 
   async function work(source, out, range) {
     isExist(source);
     const mainPDF = await PDFDocument.load(fs.readFileSync(source));
-    let pathToSave = (i) => `${out}${i}PDF.pdf`;
+    let pathToSave = (i) => [out, i, "PDF.pdf"].join("");
     range = getRange(range);
     for (let i = 0; i < range.length; i++) {
       savePDF(mainPDF, pathToSave(i + 1), range[i]);

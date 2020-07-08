@@ -7,7 +7,7 @@ try {
   let splitN = (source, out, countPagesInFile) => {
     work(source, out, countPagesInFile).catch((err) => {
       console.log(err);
-      process.exit(-1);
+      process.exit();
     });
   };
 
@@ -26,7 +26,7 @@ try {
     let i = 1,
       from = 0,
       to = countPagesInFile,
-      pathToSave = (i) => `${out}${i}PDF.pdf`;
+      pathToSave = (i) => [out, i, "PDF.pdf"].join("");
     for (; to < pageIndices.length; i++, from = to, to += countPagesInFile) {
       savePDF(mainPDF, pathToSave(i), pageIndices.slice(from, to));
       console.log(`Saved: ${pathToSave(i)}`);
@@ -39,5 +39,5 @@ try {
   module.exports = { splitN };
 } catch (err) {
   console.log(err);
-  process.exit(-1);
+  process.exit();
 }

@@ -7,7 +7,7 @@ try {
   let splitNumber = (source, out, secondPart) => {
     work(source, out, secondPart).catch((err) => {
       console.log(err);
-      process.exit(-1);
+      process.exit();
     });
   };
 
@@ -31,12 +31,12 @@ try {
 
     await savePDF(
       mainPDF,
-      `${out}firstPart.pdf`,
+      [out, firstPart, ".pdf"].join(""),
       pageIndices.slice(0, lastPageFirstPart)
     );
     await savePDF(
       mainPDF,
-      `${out}secondPart.pdf`,
+      [out, secondPart, ".pdf"].join(""),
       pageIndices.slice(lastPageFirstPart + 1)
     );
   }

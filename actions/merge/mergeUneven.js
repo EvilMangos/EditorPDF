@@ -7,7 +7,7 @@ try {
   let mergeUneven = (source, out, filesNames, range) => {
     work(source, out, filesNames, range).catch((err) => {
       console.log(err);
-      process.exit(-1);
+      process.exit();
     });
   };
 
@@ -35,6 +35,6 @@ try {
     mergeUneven,
   };
 } catch (err) {
-  console.log(err);
-  process.exit(-1);
+  // console.log(err);
+  process.exit();
 }
